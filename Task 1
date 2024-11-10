@@ -1,0 +1,39 @@
+using System;
+
+public class Address
+{
+    public int Index { get; set; }
+    public string Country { get; set; }
+    public string City { get; set; }
+    public string Street { get; set; }
+    public int House { get; set; }
+    public int Apartment { get; set; }
+
+    public void PrintAddress()
+    {
+        Console.WriteLine("Index: " + Index);
+        Console.WriteLine("Country: " + Country);
+        Console.WriteLine("City: " + City);
+        Console.WriteLine("Street: " + Street);
+        Console.WriteLine("House: " + House);
+        Console.WriteLine("Apartment: " + Apartment);
+    }
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        Address myAddress = new Address
+        {
+            Index = 79000,
+            Country = "Ukraine",
+            City = "Lviv",
+            Street = "Volodymyra Ivasyuka",
+            House = 39,
+            Apartment = 15
+        };
+
+        myAddress.PrintAddress();
+    }
+}
