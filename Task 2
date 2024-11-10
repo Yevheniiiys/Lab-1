@@ -1,0 +1,88 @@
+using System;
+
+public class Converter
+{
+    private double usdRate;
+    private double eurRate;
+    private double gbpRate;
+
+    public Converter(double usd, double eur, double gbp)
+    {
+        usdRate = usd;
+        eurRate = eur;
+        gbpRate = gbp;
+    }
+
+    public double ConvertFromUAH(string currency, double amount)
+    {
+        switch (currency.ToLower())
+        {
+            case "usd":
+                return amount / usdRate;
+            case "eur":
+                return amount / eurRate;
+            case "gbp":
+                return amount / gbpRate;
+            default:
+                throw new ArgumentException("Неправильна валюта!");
+        }
+    }
+
+    public double ConvertToUAH(string currency, double amount)
+    {
+        switch (currency.ToLower())
+        {
+            case "usd":
+                return amount * usdRate;
+            case "eur":
+                return amount * eurRate;
+            case "gbp":
+                return amount * gbpRate;
+            default:
+                throw new ArgumentException("Неправильна валюта!");
+        }
+    }
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        Console.Write("Введіть курс USD до UAH: ");
+        double usd = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Введіть курс EUR до UAH: ");
+        double eur = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Введіть курс GBP до UAH: ");
+        double gbp = Convert.ToDouble(Console.ReadLine());
+
+        Converter converter = new Converter(usd, eur, gbp);
+
+        Console.WriteLine("Оберіть операцію:");
+        Console.WriteLine("1 - Конвертація з гривні в іноземну валюту");
+        Console.WriteLine("2 - Конвертація з іноземної валюти в гривню");
+        int operation = Convert.ToInt32(Console.ReadLine());
+
+        Console.Write("Введіть валюту (USD, EUR, GBP): ");
+        string currency = Console.ReadLine();
+
+        Console.Write("Введіть суму: ");
+        double amount = Convert.ToDouble(Console.ReadLine());
+
+        if (operation == 1)
+        {
+            double result = converter.ConvertFromUAH(currency, amount);
+            Console.WriteLine("Сума в " + currency.ToUpper() + ": " + result.ToString("F2"));
+        }
+        else if (operation == 2)
+        {
+            double result = converter.ConvertToUAH(currency, amount);
+            Console.WriteLine("Сума в UAH: " + result.ToString("F2"));
+        }
+        else
+        {
+            Console.WriteLine("Неправильний напиши нормально, шльопа");
+        }
+    }
+}
