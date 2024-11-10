@@ -1,0 +1,89 @@
+using System;
+
+public class Employee
+{
+    private string lastName;
+    private string firstName;
+    private string position;
+    private int experience;
+
+    public Employee(string lastName, string firstName)
+    {
+        this.lastName = lastName;
+        this.firstName = firstName;
+    }
+
+    public void SetPositionAndExperience(string position, int experience)
+    {
+        this.position = position;
+        this.experience = experience;
+    }
+
+    public double CalculateSalary()
+    {
+        double baseSalary;
+
+        switch (position.ToLower())
+        {
+            case "junior":
+                baseSalary = 1;
+                break;
+            case "middle":
+                baseSalary = 11;
+                break;
+            case "senior":
+                baseSalary = 111;
+                break;
+            case "lead":
+                baseSalary = 1111;
+                break;
+            default:
+                throw new ArgumentException("Невідома посада!");
+        }
+
+        double experienceBonus = 0.05 * experience * baseSalary;
+        return baseSalary + experienceBonus;//ураа
+    }
+
+    public double CalculateTax()
+    {
+        double salary = CalculateSalary();
+        return salary * 0.1; // 1% податку, ну а хулі хочу буть багатим
+    }
+
+    public void PrintEmployeeInfo()
+    {
+        double salary = CalculateSalary();
+        double tax = CalculateTax();
+
+        Console.WriteLine("Інформація про співробітника:");
+        Console.WriteLine("Прізвище: " + lastName);
+        Console.WriteLine("Ім'я: " + firstName);
+        Console.WriteLine("Посада: " + position);
+        Console.WriteLine("Оклад: " + salary.ToString("F2"));
+        Console.WriteLine("Податковий збір: " + tax.ToString("F2"));
+    }
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        Console.Write("Введіть прізвище співробітника: ");
+        string lastName = Console.ReadLine();
+
+        Console.Write("Введіть ім'я співробітника: ");
+        string firstName = Console.ReadLine();
+
+        Employee employee = new Employee(lastName, firstName);
+
+        Console.Write("Введіть посаду співробітника (Junior, Middle, Senior, Lead): ");
+        string position = Console.ReadLine();
+
+        Console.Write("Введіть стаж роботи (в роках): ");
+        int experience = Convert.ToInt32(Console.ReadLine());
+
+        employee.SetPositionAndExperience(position, experience);
+        employee.PrintEmployeeInfo();
+    }
+}
