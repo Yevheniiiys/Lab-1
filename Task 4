@@ -1,0 +1,50 @@
+using System;
+
+public class User
+{
+    public string Login { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public int Age { get; set; }
+    public readonly DateTime RegistrationDate;
+
+    public User(string login, string firstName, string lastName, int age)
+    {
+        Login = login;
+        FirstName = firstName;
+        LastName = lastName;
+        Age = age;
+        RegistrationDate = DateTime.Now;
+    }
+
+    public void PrintUserInfo()
+    {
+        Console.WriteLine("Інформація про користувача:");
+        Console.WriteLine("Логін: " + Login);
+        Console.WriteLine("Ім'я: " + FirstName);
+        Console.WriteLine("Прізвище: " + LastName);
+        Console.WriteLine("Вік: " + Age);
+        Console.WriteLine("Дата заповнення анкети: " + RegistrationDate.ToString("dd.MM.yyyy HH:mm"));
+    }
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        Console.Write("Введіть логін користувача: ");
+        string login = Console.ReadLine();
+
+        Console.Write("Введіть ім'я користувача: ");
+        string firstName = Console.ReadLine();
+
+        Console.Write("Введіть прізвище користувача: ");
+        string lastName = Console.ReadLine();
+
+        Console.Write("Введіть вік користувача: ");
+        int age = Convert.ToInt32(Console.ReadLine());
+
+        User user = new User(login, firstName, lastName, age);
+        user.PrintUserInfo();
+    }
+}
